@@ -1,7 +1,7 @@
 import com.github.dynamicextensionsalfresco.gradle.tasks.*
 
 buildscript {
-  repositories { 
+  repositories {
 	jcenter()
   }
   dependencies {
@@ -64,4 +64,19 @@ jar {
 
 task installDependencies(type: InstallBundle) {
     configuration = configurations.install
+}
+
+task amp(type: Zip, dependsOn: jar) {
+    from(jar.outputs.files) {
+        into('config/dynamic-extensions/bundles/')
+    }
+    from(file('etc/module.properties'))
+
+    from("$project.rootDir/lib/jdom-1.0.jar") {
+        into('lib')
+    }
+
+    baseName = 'my-dynamic-extension-packaged'
+    extension 'amp'
+    destinationDir = file("$buildDir/amps")
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!--
         This is an example Dynamic Extension.
@@ -20,6 +20,7 @@
               The version should be the latest Dynamic Extensions milestone release.
             -->
         <dynamicextensions.version>1.3.0</dynamicextensions.version>
+        <libDir>${project.basedir}/lib</libDir>
         <!--
               Change the Alfresco API and Spring Web Scripts versions if necessary.
             -->
@@ -31,6 +32,23 @@
       Dynamic Extensions typically only have 'provided' dependencies.
     -->
     <dependencies>
+
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>webscripts</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${libDir}/webscripts-1.4.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>annotations</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${libDir}/annotations-1.4.0.jar</systemPath>
+        </dependency>
+
         <dependency>
             <groupId>org.alfresco</groupId>
             <artifactId>alfresco-core</artifactId>
@@ -55,25 +73,18 @@
             <version>${spring-webscripts.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!--
-                Provides annotations for annotation-based Actions, Behaviours and Web Scripts.
-
-                The annotation approach is specific to Dynamic Extensions.
-          -->
-        <!--<dependency>
+        <!-- Provides annotations for annotation-based Actions, Behaviours and Web Scripts.
+             The annotation approach is specific to Dynamic Extensions. -->
+        <dependency>
             <groupId>com.github.dynamicextensionsalfresco</groupId>
             <artifactId>annotations-runtime</artifactId>
             <version>${dynamicextensions.version}</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
         <dependency>
-            <!--
-                  Provides the javax.annotations.ManagedBean annotation.
-
+            <!-- Provides the javax.annotations.ManagedBean annotation.
                   This library is also bundled with Dynamic Extensions.
-
-                  In general you should also NOT change the version.
-                -->
+                  In general you should also NOT change the version. -->
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-annotation_1.1_spec</artifactId>
             <version>1.0.1</version>
